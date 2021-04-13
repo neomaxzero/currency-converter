@@ -15,5 +15,6 @@
   - I've worked before with Next.JS and it can be flexible enough to go from a Client side rendered app to a fully server side rendered app. (Proficiency)
   - Future features availability. (Potential)
   - Chakra UI because of accessibility and documentation wise it's very easy to follow.
+  - I introduce acceptance tests at an earlier stage to allow some refactoring.
 
 ## Roadmap

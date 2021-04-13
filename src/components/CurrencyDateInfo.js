@@ -1,7 +1,11 @@
+import { Box, Text } from "@chakra-ui/layout";
+
 const CurrencyDateInfo = ({ date }) => (
-  <div>
-    Updated: <span test-id="date">{date}</span>
-  </div>
+  <Box>
+    <Text fontSize="sm" color="gray.500" mt={2}>
+      Last updated: <span test-id="date">{date}</span>
+    </Text>
+  </Box>
 );
 
 export default CurrencyDateInfo;

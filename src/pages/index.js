@@ -3,6 +3,9 @@ import CurrencyResult from "components/CurrencyResult";
 import React, { useEffect, useState } from "react";
 import CurrencyForm from "components/CurrencyForm";
 import getLatestRates from "repository/rates";
+import AppLayout from "components/Layout/AppLayout";
+import CurrencyCard from "components/CurrencyCard";
+import { Box, Flex } from "@chakra-ui/layout";
 
 function MainPage() {
   const [ratesResult, setRatesResult] = useState(null);
@@ -10,9 +13,9 @@ function MainPage() {
   const [selectedSource, setSelectedSource] = useState("EUR");
 
   const [symbols, setSymbols] = useState([]);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState();
   const [triggerCalculation, setTriggerCalculation] = useState(false);
-  const [conversionResult, setConversionResult] = useState(0);
+  const [conversionResult, setConversionResult] = useState();
 
   const selectTarget = ({ target }) => {
     setSelectedTarget(target.value);
@@ -54,27 +57,33 @@ function MainPage() {
   }, [selectedTarget, setConversionResult, triggerCalculation, ratesResult]);
 
   return (
-    <main>
-      <h1>Currency converter</h1>
+    <AppLayout>
       {!ratesResult ? (
         "Loading..."
       ) : (
-        <>
+        <Flex
+          justify="center"
+          mt={{ sm: 8 }}
+          alignItems="center"
+          direction="column"
+        >
+          <CurrencyCard>
+            <CurrencyForm
+              calculateConversion={calculateConversion}
+              selectSource={selectSource}
+              selectedSource={selectedSource}
+              symbols={symbols}
+              selectTarget={selectTarget}
+              selectedTarget={selectedTarget}
+              amount={amount}
+              setAmount={setAmount}
+            />
+          </CurrencyCard>
           <CurrencyDateInfo date={ratesResult.date} />
-          <CurrencyForm
-            calculateConversion={calculateConversion}
-            selectSource={selectSource}
-            selectedSource={selectedSource}
-            symbols={symbols}
-            selectTarget={selectTarget}
-            selectedTarget={selectedTarget}
-            amount={amount}
-            setAmount={setAmount}
-          />
           <CurrencyResult result={conversionResult} />
-        </>
+        </Flex>
       )}
-    </main>
+    </AppLayout>
   );
 }
 
