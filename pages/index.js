@@ -65,6 +65,7 @@ function MainPage() {
                 name="source"
                 onChange={selectSource}
                 value={selectedSource}
+                test-id="source"
               >
                 {symbols.map((symbol) => (
                   <option value={symbol}>{symbol} </option>
@@ -78,6 +79,7 @@ function MainPage() {
                 name="target"
                 onChange={selectTarget}
                 value={selectedTarget}
+                test-id="target"
               >
                 {symbols.map((symbol) => (
                   <option value={symbol}>{symbol} </option>
@@ -90,14 +92,15 @@ function MainPage() {
                 name="amount"
                 value={amount}
                 onChange={({ target }) => setAmount(target.value)}
+                test-id="amount"
               ></input>
             </div>
-            <button>Convert</button>
+            <button test-id="convert">Convert</button>
           </form>
           {conversionResult > 0 && (
             <div>
               <h2>Converted Amount: </h2>
-              <p>{conversionResult}</p>
+              <p test-id="result">{conversionResult}</p>
             </div>
           )}
         </>
