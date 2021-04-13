@@ -8,5 +8,6 @@ describe("Currency converter", () => {
     cy.get('[test-id="amount"]').type("40");
     cy.get('[test-id="convert"]').click();
     cy.get('[test-id="result"]').should("have.text", "52.629");
+    cy.get('[test-id="date"]').should("have.text", "2021-04-13");
   });
 });

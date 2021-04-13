@@ -1,5 +1,8 @@
+import CurrencyDateInfo from "components/CurrencyDateInfo";
+import CurrencyResult from "components/CurrencyResult";
 import React, { useEffect, useState } from "react";
-import getLatestRates from "../repository/rates";
+import CurrencyForm from "components/CurrencyForm";
+import getLatestRates from "repository/rates";
 
 function MainPage() {
   const [ratesResult, setRatesResult] = useState(null);
@@ -57,52 +60,18 @@ function MainPage() {
         "Loading..."
       ) : (
         <>
-          <div>Updated:{ratesResult.date}</div>
-          <form onSubmit={calculateConversion}>
-            <div>
-              <label htmlFor="source">Source</label>
-              <select
-                name="source"
-                onChange={selectSource}
-                value={selectedSource}
-                test-id="source"
-              >
-                {symbols.map((symbol) => (
-                  <option value={symbol}>{symbol} </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="target">Target</label>
-              {/* <SymbolSelector symbols={targets}  */}
-              <select
-                name="target"
-                onChange={selectTarget}
-                value={selectedTarget}
-                test-id="target"
-              >
-                {symbols.map((symbol) => (
-                  <option value={symbol}>{symbol} </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="amount">Amount</label>
-              <input
-                name="amount"
-                value={amount}
-                onChange={({ target }) => setAmount(target.value)}
-                test-id="amount"
-              ></input>
-            </div>
-            <button test-id="convert">Convert</button>
-          </form>
-          {conversionResult > 0 && (
-            <div>
-              <h2>Converted Amount: </h2>
-              <p test-id="result">{conversionResult}</p>
-            </div>
-          )}
+          <CurrencyDateInfo date={ratesResult.date} />
+          <CurrencyForm
+            calculateConversion={calculateConversion}
+            selectSource={selectSource}
+            selectedSource={selectedSource}
+            symbols={symbols}
+            selectTarget={selectTarget}
+            selectedTarget={selectedTarget}
+            amount={amount}
+            setAmount={setAmount}
+          />
+          <CurrencyResult result={conversionResult} />
         </>
       )}
     </main>
