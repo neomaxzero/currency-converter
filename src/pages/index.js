@@ -5,11 +5,11 @@ import CurrencyForm from "components/CurrencyForm";
 import getLatestRates from "repository/rates";
 import AppLayout from "components/Layout/AppLayout";
 import CurrencyCard from "components/CurrencyCard";
-import { Box, Flex } from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/layout";
 
 function MainPage() {
   const [ratesResult, setRatesResult] = useState(null);
-  const [selectedTarget, setSelectedTarget] = useState(null);
+  const [selectedTarget, setSelectedTarget] = useState("GBP");
   const [selectedSource, setSelectedSource] = useState("EUR");
 
   const [symbols, setSymbols] = useState([]);
@@ -30,18 +30,22 @@ function MainPage() {
     setTriggerCalculation((trigger) => !trigger);
   };
 
+  const onSwitch = () => {
+    setSelectedSource(selectedTarget);
+    setSelectedTarget(selectedSource);
+  };
+
   useEffect(() => {
     const getRates = async () => {
       const rates = await getLatestRates(selectedSource);
-      // Not always we receive the source symbol in the list
+
       if (!rates.rates[rates.base]) {
         rates.rates[rates.base] = 1;
       }
-      // TODO: Calculate and save and not useState.
+
       const allSymbols = Object.keys(rates.rates);
       setSymbols(allSymbols);
       setRatesResult(rates);
-      setSelectedTarget(allSymbols[0]);
     };
 
     getRates();
@@ -77,6 +81,7 @@ function MainPage() {
               selectedTarget={selectedTarget}
               amount={amount}
               setAmount={setAmount}
+              onSwitch={onSwitch}
             />
           </CurrencyCard>
           <CurrencyDateInfo date={ratesResult.date} />

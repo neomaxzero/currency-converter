@@ -5,8 +5,10 @@ import {
   FormLabel,
   Input,
   Select,
+  Tooltip,
   VStack,
 } from "@chakra-ui/react";
+import { UpDownIcon } from "@chakra-ui/icons";
 
 const CurrencyForm = ({
   calculateConversion,
@@ -17,6 +19,7 @@ const CurrencyForm = ({
   selectedTarget,
   amount,
   setAmount,
+  onSwitch,
 }) => {
   return (
     <form onSubmit={calculateConversion}>
@@ -30,7 +33,7 @@ const CurrencyForm = ({
             test-id="source"
           >
             {symbols.map((symbol) => (
-              <option value={symbol}>{symbol} </option>
+              <option value={symbol}>{symbol}</option>
             ))}
           </Select>
         </FormControl>
@@ -59,9 +62,14 @@ const CurrencyForm = ({
           />
         </FormControl>
       </VStack>
-      <Flex justify="flex-end">
+      <Flex justify="space-between" mt={6}>
+        <Tooltip label="Swap FROM and TO" fontSize="md">
+          <Button onClick={onSwitch} test-id="swap">
+            <UpDownIcon />
+          </Button>
+        </Tooltip>
         <Button
-          mt={6}
+          type="submit"
           test-id="convert"
           bgColor="orange.400"
           color="white"
