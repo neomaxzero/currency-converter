@@ -1,6 +1,7 @@
 # Currency converter App
 
-> [Check Assignment here](./ASSIGMENT.md)
+- [Check live example here](https://currency-converter-ruby.vercel.app/)
+- [Check assignment here](./ASSIGMENT.md)
 
 ## Available Commands
 
