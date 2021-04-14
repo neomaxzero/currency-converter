@@ -5,18 +5,18 @@ describe("Currency converter", () => {
     cy.visit("/");
   });
   it("Converts from USD to AUD", () => {
-    cy.get('[test-id="source"]').select("USD");
-    cy.get('[test-id="target"]').select("AUD");
-    cy.get('[test-id="amount"]').type("40");
-    cy.get('[test-id="convert"]').click();
-    cy.get('[test-id="result"]').should("have.text", "52.629");
-    cy.get('[test-id="date"]').should("have.text", "2021-04-13");
+    cy.getByTestId("source").select("USD");
+    cy.getByTestId("target").select("AUD");
+    cy.getByTestId("amount").type("40");
+    cy.getByTestId("convert").click();
+    cy.getByTestId("result").should("have.text", "52.629");
+    cy.getByTestId("date").should("have.text", "2021-04-13");
   });
 
   it("Swap between currencies", () => {
-    cy.get('[test-id="amount"]').type("40");
-    cy.get('[test-id="swap"]').click();
-    cy.get('[test-id="convert"]').click();
-    cy.get('[test-id="result"]').should("have.text", "46.020");
+    cy.getByTestId("amount").type("40");
+    cy.getByTestId("swap").click();
+    cy.getByTestId("convert").click();
+    cy.getByTestId("result").should("have.text", "46.020");
   });
 });

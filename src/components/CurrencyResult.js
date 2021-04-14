@@ -1,5 +1,6 @@
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Flex, Text } from "@chakra-ui/layout";
 import { Collapse } from "@chakra-ui/transition";
+import PropTypes from "prop-types";
 
 const CurrencyResult = ({ result }) => {
   return (
@@ -17,7 +18,7 @@ const CurrencyResult = ({ result }) => {
         alignItems="center"
       >
         <Text color="green.800" fontSize="sm">
-          Converted Amount{" "}
+          Converted Amount
         </Text>
         <Text fontSize="3xl" test-id="result">
           {result}
@@ -25,6 +26,10 @@ const CurrencyResult = ({ result }) => {
       </Flex>
     </Collapse>
   );
+};
+
+CurrencyResult.propTypes = {
+  result: PropTypes.string,
 };
 
 export default CurrencyResult;

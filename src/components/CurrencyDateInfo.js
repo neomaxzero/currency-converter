@@ -1,4 +1,5 @@
 import { Box, Text } from "@chakra-ui/layout";
+import PropTypes from "prop-types";
 
 const CurrencyDateInfo = ({ date }) => (
   <Box>
@@ -7,5 +8,9 @@ const CurrencyDateInfo = ({ date }) => (
     </Text>
   </Box>
 );
+
+CurrencyDateInfo.propTypes = {
+  date: PropTypes.string.isRequired,
+};
 
 export default CurrencyDateInfo;

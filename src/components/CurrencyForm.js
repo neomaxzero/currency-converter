@@ -9,6 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { UpDownIcon } from "@chakra-ui/icons";
+import PropTypes from "prop-types";
 
 const CurrencyForm = ({
   calculateConversion,
@@ -33,7 +34,9 @@ const CurrencyForm = ({
             test-id="source"
           >
             {symbols.map((symbol) => (
-              <option value={symbol}>{symbol}</option>
+              <option value={symbol} key={`${symbol}-source`}>
+                {symbol}
+              </option>
             ))}
           </Select>
         </FormControl>
@@ -46,7 +49,9 @@ const CurrencyForm = ({
             test-id="target"
           >
             {symbols.map((symbol) => (
-              <option value={symbol}>{symbol} </option>
+              <option value={symbol} key={`${symbol}-target`}>
+                {symbol}{" "}
+              </option>
             ))}
           </Select>
         </FormControl>
@@ -80,6 +85,22 @@ const CurrencyForm = ({
       </Flex>
     </form>
   );
+};
+
+CurrencyForm.propTypes = {
+  calculateConversion: PropTypes.func.isRequired,
+  selectSource: PropTypes.func.isRequired,
+  selectedSource: PropTypes.string,
+  symbols: PropTypes.arrayOf(PropTypes.string),
+  selectTarget: PropTypes.func.isRequired,
+  selectedTarget: PropTypes.string,
+  amount: PropTypes.string,
+  setAmount: PropTypes.func.isRequired,
+  onSwitch: PropTypes.func.isRequired,
+};
+
+CurrencyForm.defaultProps = {
+  amount: "",
 };
 
 export default CurrencyForm;
